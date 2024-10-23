@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class EpsilonGreedyBandit:
     def __init__(self, epsilon, n_actions):
@@ -17,17 +18,13 @@ class EpsilonGreedyBandit:
         self.action_counts[action] += 1
         self.q_values[action] += (reward - self.q_values[action]) / self.action_counts[action]
 
-def simulateBandit(epsilon, n_episodes, banditA, banditB):
-    bandit = EpsilonGreedyBandit(epsilon, 2)  
-    rewards = []  
+def simulateBanditForOne(bandit_func, epsilon, n_episodes):
+    bandit = EpsilonGreedyBandit(epsilon, 1)  
+    rewards = []
 
     for episode in range(n_episodes):
-        action = bandit.selectAction()  
-        if action == 0:
-            reward = banditA()  
-        else:
-            reward = banditB() 
-        
+        action = bandit.selectAction() 
+        reward = bandit_func()  
         bandit.updateQValue(action, reward)  
         rewards.append(reward)
 
