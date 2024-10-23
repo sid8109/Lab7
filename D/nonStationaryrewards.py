@@ -53,7 +53,7 @@ def run_experiment(bandit, agent, steps=10000):
     return rewards, actions
 
 bandit = NonStationaryBandit(arms=10, steps=10000)
-agent = ModifiedEpsilonGreedyAgent(arms=10, epsilon=0.1, alpha=0.1)
+agent = ModifiedEpsilonGreedyAgent(arms=10, epsilon=0.1, alpha=0.7)
 
 rewards, actions = run_experiment(bandit, agent, 10000)
 
